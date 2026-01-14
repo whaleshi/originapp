@@ -1,0 +1,60 @@
+{
+    "expo": {
+        "name": "origin",
+        "slug": "expo-starter",
+        "version": "1.0.0",
+        "orientation": "portrait",
+        "icon": "./assets/origin/images/logo.png",
+        "scheme": "myapp",
+        "userInterfaceStyle": "automatic",
+        "splash": {
+            "image": "./assets/origin/images/logo.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#0D0F13"
+        },
+        "ios": {
+            // "usesAppleSignIn": true,
+            "supportsTablet": true,
+            "bundleIdentifier": "com.jing.myweb3app.dev",
+            // "associatedDomains": ["webcredentials:<your-associated-domain>"],
+            "infoPlist": {
+                "NSAppTransportSecurity": {
+                    "NSAllowsArbitraryLoads": true
+                }
+            }
+        },
+        "android": {
+            "adaptiveIcon": {
+                "foregroundImage": "./assets/images/adaptive-icon.png",
+                "backgroundColor": "#ffffff"
+            },
+            "package": "com.jing.myweb3app.dev"
+        },
+        "extra": {
+            "privyAppId": "cmkdqgvhg04v8lb0cs50zjfkl",
+            "privyClientId": "client-WY6V7ME5K89gS7N7xrQY1YWbZLRprg75tGvfR9TGY61xk",
+            "passkeyAssociatedDomain": "https://<your-associated-domain>"
+        },
+        "plugins": [
+            "expo-router",
+            "expo-secure-store",
+            // "expo-apple-authentication",
+            [
+                "expo-build-properties",
+                {
+                    "ios": {
+                        "deploymentTarget": "17.0"
+                    },
+                    "android": {
+                        "compileSdkVersion": 35
+                    }
+                }
+            ],
+            "expo-font",
+            "expo-web-browser"
+        ],
+        "experiments": {
+            "typedRoutes": true
+        }
+    }
+}
