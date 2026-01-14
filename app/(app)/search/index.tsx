@@ -5,15 +5,13 @@ import { CloseIcon, SearchInputIcon } from "@/components/origin/icons";
 import { useRouter } from "expo-router";
 import { originImages } from "@/components/origin/assets";
 import { Image } from "react-native";
-import AppScaffold from "@/components/origin/AppScaffold";
 
 export default function SearchPage() {
   const [inputValue, setInputValue] = useState("");
   const router = useRouter();
 
   return (
-    <AppScaffold>
-      <View className="flex-1">
+    <View className="flex-1">
         <View className="px-[16px] py-[8px] flex flex-row items-center gap-[16px]">
           <View className="flex-1 flex flex-row items-center bg-[#191B1F] border-[1px] border-[#25262A] rounded-[8px] px-[8px]">
             <SearchInputIcon />
@@ -48,7 +46,6 @@ export default function SearchPage() {
             <Text className="text-[#868789] text-[14px] mt-[12px]">暂无数据</Text>
           </View>
         )}
-      </View>
-    </AppScaffold>
+    </View>
   );
 }

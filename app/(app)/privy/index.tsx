@@ -4,20 +4,17 @@ import Constants from "expo-constants";
 import { usePrivy } from "@privy-io/expo";
 import LoginScreen from "@/components/LoginScreen";
 import { UserScreen } from "@/components/UserScreen";
-import AppScaffold from "@/components/origin/AppScaffold";
 
 export default function PrivyPage() {
   const { user } = usePrivy();
 
   if ((Constants.expoConfig?.extra?.privyAppId as string).length !== 25) {
     return (
-      <AppScaffold>
-        <SafeAreaView>
-          <View className="items-center justify-center">
-            <Text className="text-white">You have not set a valid `privyAppId` in app.json</Text>
-          </View>
-        </SafeAreaView>
-      </AppScaffold>
+      <SafeAreaView>
+        <View className="items-center justify-center">
+          <Text className="text-white">You have not set a valid `privyAppId` in app.json</Text>
+        </View>
+      </SafeAreaView>
     );
   }
 
@@ -25,15 +22,13 @@ export default function PrivyPage() {
     !(Constants.expoConfig?.extra?.privyClientId as string).startsWith("client-")
   ) {
     return (
-      <AppScaffold>
-        <SafeAreaView>
-          <View className="items-center justify-center">
-            <Text className="text-white">You have not set a valid `privyClientId` in app.json</Text>
-          </View>
-        </SafeAreaView>
-      </AppScaffold>
+      <SafeAreaView>
+        <View className="items-center justify-center">
+          <Text className="text-white">You have not set a valid `privyClientId` in app.json</Text>
+        </View>
+      </SafeAreaView>
     );
   }
 
-  return <AppScaffold>{!user ? <LoginScreen /> : <UserScreen />}</AppScaffold>;
+  return !user ? <LoginScreen /> : <UserScreen />;
 }

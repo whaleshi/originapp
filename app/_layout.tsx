@@ -16,6 +16,7 @@ export default function RootLayout() {
           screenOptions={{
             headerShown: false,
             contentStyle: { backgroundColor: "#0D0F13" },
+            animation: "none",
           }}
         />
         <PrivyElements />

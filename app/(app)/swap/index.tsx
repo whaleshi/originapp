@@ -12,7 +12,6 @@ import SwapAbout from "@/components/origin/swapAbout";
 import MiningDialog from "@/components/origin/miningDialog";
 import { SwapList } from "@/components/origin/swapList";
 import ListDialog from "@/components/origin/listDialog";
-import AppScaffold from "@/components/origin/AppScaffold";
 
 export default function Swap() {
   const [amount, setAmount] = useState("");
@@ -20,8 +19,7 @@ export default function Swap() {
   const [isListDialogOpen, setIsListDialogOpen] = useState(false);
 
   return (
-    <AppScaffold>
-      <ScrollView className="flex-1" contentContainerClassName="items-center w-full px-[14px] pb-[40px]">
+    <ScrollView className="flex-1" contentContainerClassName="items-center w-full px-[14px] pb-[40px]">
         <View className="w-full max-w-[600px] flex flex-row items-center justify-between mt-[24px]">
           <Text className="text-[28px] text-[#fff] font-bold">SWAP</Text>
           <Pressable
@@ -104,7 +102,6 @@ export default function Swap() {
         </View>
         <MiningDialog isOpen={isMiningDialogOpen} onOpenChange={setIsMiningDialogOpen} />
         <ListDialog isOpen={isListDialogOpen} onOpenChange={setIsListDialogOpen} />
-      </ScrollView>
-    </AppScaffold>
+    </ScrollView>
   );
 }
