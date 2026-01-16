@@ -8,20 +8,21 @@ import {
 } from "react-native-safe-area-context";
 import { Navbar } from "@/components/origin/navbar";
 import Footer from "@/components/origin/footer";
+import { useAppTheme } from "@/components/theme/ThemeProvider";
 
 export default function AppLayout() {
   const pathname = usePathname();
   const insets = useSafeAreaInsets();
+  const { colors, isDark } = useAppTheme();
   const hideFooter =
     pathname === "/create" || pathname === "/search" || pathname.startsWith("/token/");
 
   return (
     <SafeAreaView
-      className="flex-1 bg-[#0D0F13]"
-      style={{ flex: 1, backgroundColor: "#0D0F13" }}
+      style={{ flex: 1, backgroundColor: colors.background }}
       edges={["top", "left", "right"]}
     >
-      <StatusBar style="light" />
+      <StatusBar style={isDark ? "light" : "dark"} />
       <Navbar />
       <View
         className="flex-1"

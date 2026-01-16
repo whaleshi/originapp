@@ -1,5 +1,5 @@
-import React from "react";
-import { ScrollView, View, Text } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { ScrollView, View, Text, type NativeScrollEvent, type NativeSyntheticEvent } from "react-native";
 import MyAvatar from "./avatar";
 
 const transactions = [
@@ -19,14 +19,48 @@ const colorSchemes = [
 ];
 
 export default function TopScroll() {
+  const scrollRef = useRef<ScrollView | null>(null);
+  const scrollX = useRef(0);
+  const [contentWidth, setContentWidth] = useState(0);
+  const [containerWidth, setContainerWidth] = useState(0);
+
+  useEffect(() => {
+    if (!contentWidth || !containerWidth) return;
+    const singleWidth = contentWidth / 2;
+    if (singleWidth === 0 || containerWidth === 0) return;
+    const timer = setInterval(() => {
+      scrollX.current = scrollX.current + 1;
+      if (scrollX.current >= singleWidth) {
+        scrollX.current = 0;
+      }
+      scrollRef.current?.scrollTo({ x: scrollX.current, animated: false });
+    }, 16);
+    return () => clearInterval(timer);
+  }, [contentWidth, containerWidth]);
+
+  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    scrollX.current = event.nativeEvent.contentOffset.x;
+  };
+
+  const items = [...transactions, ...transactions];
+
   return (
-    <ScrollView horizontal showsHorizontalScrollIndicator={false} className="w-full">
+    <ScrollView
+      ref={scrollRef}
+      horizontal
+      showsHorizontalScrollIndicator={false}
+      className="w-full"
+      scrollEventThrottle={16}
+      onScroll={handleScroll}
+      onContentSizeChange={(width) => setContentWidth(width)}
+      onLayout={(event) => setContainerWidth(event.nativeEvent.layout.width)}
+    >
       <View className="flex flex-row items-center">
-        {transactions.map((tx, index) => {
+        {items.map((tx, index) => {
           const colorScheme = colorSchemes[index % colorSchemes.length];
           return (
             <View
-              key={tx.id}
+              key={`${tx.id}-${index}`}
               className="flex flex-row items-center gap-1 px-3 h-[26px] mx-1 rounded-[6px]"
               style={{ backgroundColor: colorScheme.bg }}
             >

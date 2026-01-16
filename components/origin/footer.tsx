@@ -3,11 +3,13 @@ import { Pressable, Text, View } from "react-native";
 import { usePathname, useRouter } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { FooterIcon1, FooterIcon2, SwapIcon } from "./icons";
+import { useAppTheme } from "../theme/ThemeProvider";
 
 export default function Footer() {
   const router = useRouter();
   const pathname = usePathname();
   const insets = useSafeAreaInsets();
+  const { colors } = useAppTheme();
 
   const items = [
     { id: "origin", label: "起源", path: "/", icon: <FooterIcon1 /> },
@@ -17,8 +19,8 @@ export default function Footer() {
 
   return (
     <View
-      className="absolute bottom-0 left-0 right-0 bg-[#1A1C20] border-t border-[#25262A]"
-      style={{ paddingBottom: insets.bottom }}
+      className="absolute bottom-0 left-0 right-0 border-t"
+      style={{ paddingBottom: insets.bottom, backgroundColor: colors.surface, borderColor: colors.border }}
     >
       <View className="flex flex-row items-center justify-around h-[52px]">
         {items.map((item) => {
@@ -29,17 +31,10 @@ export default function Footer() {
               className="flex-1 items-center justify-center"
               onPress={() => router.push(item.path)}
             >
-              {item.id === "swap" ? (
-                <View className="absolute -top-[18px]">
-                  <FooterIcon1 />
-                  {/* <SwapIcon className={isActive ? "rotate-90" : ""} /> */}
-                </View>
-              ) : (
-                <View className={`mb-1 ${isActive ? "opacity-100" : "opacity-60"}`}>
-                  {item.icon}
-                </View>
-              )}
-              <Text className={`text-[12px] font-medium ${isActive ? "text-[#FFF]" : "text-[#606164]"}`}>
+              <View className={`mb-1 ${isActive ? "opacity-100" : "opacity-60"}`} style={{ color: isActive ? colors.text : colors.textSecondary }}>
+                {item.icon}
+              </View>
+              <Text className={`text-[12px] font-medium`} style={{ color: isActive ? colors.text : colors.textSecondary }}>
                 {item.label}
               </Text>
             </Pressable>
